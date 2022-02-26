@@ -1,5 +1,6 @@
 package com.adilmx.aopcustomannotations.service.impl;
 
+import com.adilmx.aopcustomannotations.annotation.CustomSecurity;
 import com.adilmx.aopcustomannotations.annotation.Log;
 import com.adilmx.aopcustomannotations.model.Product;
 import com.adilmx.aopcustomannotations.service.ProductService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements ProductService {
     @Override
     @Log
+    @CustomSecurity(role={"ADMIN","USER"})
     public double getTotalPrice(Product product, int quantity) {
         System.out.println("getting price process started from inner scope...");
         if (product != null) {
@@ -20,6 +22,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @CustomSecurity(role={"USER"})
     public double getTotalPriceTax(Product product, int quantity, double tax) {
         System.out.println("getting price process started from inner scope...");
         if (product != null) {
